@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="row">
+    <div class="col">
+        <h1>Informations sur {{ animal.id_animal }}</h1>
+        <p>Dites bonjour à <b>{{ animal.id_animal }}</b> qui est un animal de type <b>{{ animal.type }}</b> et de race <b>{{ animal.race }}</b> !</p>
+        <b href="/">{{ animal.etat|linebreaksbr }}</b>
+        <p></p>
+        <b href="/">{{ animal.lieu|linebreaksbr }}</b>
+        <p></p>
+        <form method="POST" class="post-form">{% csrf_token %}
+            <b> Changer : </b> {{ form.as_ul }}
+            <button type="submit" class="btn btn-outline">OK</button>
+            <a href="{% url 'animal_list' %}">Back</a>
+        </form>
+    </div>
+    <div class="col">
+        <p></p>
+        <b href="/"><img src="{{animal.photo}}" alt="" width="400" height="350"/></b>
+    </div>
+
+    <div class="col">
+        <h1>Etat des équipements</h1>
+        <p></p>
+        {% for equipement in equipements %}
+                <h3><b href="/">{{equipement.id_equip}}</b></h3>
+                <p><b href="/">Disponibilité : {{ equipement.disponibilite }}</b></p>
+        {% endfor %}
+    </div>
+
+</div>
+
+
+{% endblock %}

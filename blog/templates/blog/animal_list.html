@@ -1,0 +1,43 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<div class="card">
+
+    <div class="row">
+        <h1> Animaux</h1>
+        {% for animal in animals %}
+            <div class="col">
+
+                <b href="/"><img src="{{animal.photo}}" alt="" width="200" height="150"/></b>
+                <p></p>
+                <p>{{ animal.id_animal }} &emsp;<I>{{ animal.etat|linebreaksbr }}</I></p>
+                <p><b href="/">{{ animal.lieu|linebreaksbr }}</b> </p>
+                <p></p>
+                <div class="btn-group">
+                    <a class="btn btn-sm btn-outline-success" href="{% url 'animal_detail' id_animal=animal.id_animal %}">Plus de détails</a>
+                </div>
+            </div>
+
+        {% endfor %}
+    </div>
+    <p></p>
+
+    <div class="row">
+        <h1> Equipements</h1>
+        {% for equipement in equipements %}
+            <div class="col">
+                <b href="/"><img src="{{equipement.photo}}" alt="" width="200" height="200"/></b>
+                <p>{{ equipement.id_equip }}</p>
+                {% if equipement.disponibilite == 'libre' %}
+                <div id="libre"> ✔ {{ equipement.disponibilite }}</div>
+            {% else %}
+                <div id="occupe"> ✘ {{ equipement.disponibilite }}</div>
+            {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
